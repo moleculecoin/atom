@@ -79,6 +79,9 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) :
     walletFrame = new WalletFrame(this);
     setCentralWidget(walletFrame);
 
+    setObjectName("atomWalletApp");
+    setStyleSheet("#atomWalletApp { background-image:url(:/icons/padded);background-position: bottom right;background-repeat:repeat-xy; }");
+
     // Accept D&D of URIs
     setAcceptDrops(true);
 
@@ -290,6 +293,7 @@ void BitcoinGUI::createToolBars()
     toolbar->addAction(receiveCoinsAction);
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
+    toolbar->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #808080, stop:0.935 #404040); ");
 }
 
 void BitcoinGUI::setClientModel(ClientModel *clientModel)

@@ -1137,7 +1137,8 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     // Genesis block
     if (pindexLast == NULL)
         return nProofOfWorkLimit;
-
+    if (pindexLast->pprev == NULL)
+	return nProofOfWorkLimit;
     if (pindexLast->nHeight == 9607) // reset difficulty
 	return nProofOfWorkLimit;
 
@@ -1170,7 +1171,10 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         nIntervalSmoothing = nInterval; 
     const CBlockIndex* pindexFirst = pindexLast;
     for (int i = 0; pindexFirst && i < nIntervalSmoothing; i++)
-        pindexFirst = pindexFirst->pprev;
+    {
+        if(pindexFirst->pprev != NULL)
+	    pindexFirst = pindexFirst->pprev;
+    }
     assert(pindexFirst);
 
     // Limit adjustment step
@@ -2037,6 +2041,7 @@ bool FindBlockPos(CValidationState &state, CDiskBlockPos &pos, unsigned int nAdd
             nLastBlockFile = pos.nFile;
             infoLastBlockFile.SetNull();
             pblocktree->ReadBlockFileInfo(nLastBlockFile, infoLastBlockFile);
+
             fUpdatedLast = true;
         }
     } else {
@@ -2150,8 +2155,21 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
     }
 */
     // Check proof of work matches claimed amount
+// Get prev block index
+    map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
+    if (mi == mapBlockIndex.end())
+        {
+}
+else
+{
+    CBlockIndex* pindexPrev = (*mi).second;
+    int nHeight = pindexPrev->nHeight+1;
+    if(nHeight > 26949)
+    {
     if (fCheckPOW && !CheckProofOfWork(GetHash(), nBits))
         return state.DoS(50, error("CheckBlock() : proof of work failed"));
+    }
+}
 
     // Check timestamp
     if (GetBlockTime() > GetAdjustedTime() +  1 * 60 * 60)
@@ -2216,7 +2234,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
         nHeight = pindexPrev->nHeight+1;
 
         // Check proof of work
-        if (nBits != GetNextWorkRequired(pindexPrev, this))
+        if (nHeight > 26949 && nBits != GetNextWorkRequired(pindexPrev, this))
             return state.DoS(100, error("AcceptBlock() : incorrect proof of work"));
 
         // Check timestamp against prev

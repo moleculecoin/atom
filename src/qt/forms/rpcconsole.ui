@@ -14,7 +14,7 @@
    <string>Atom - Debug window</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 84);</string>
+   <string notr="true">background-color: transparent;</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>

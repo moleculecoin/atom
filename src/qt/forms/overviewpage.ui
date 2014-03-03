@@ -14,10 +14,11 @@
    <string>Form</string>
   </property>
   <property name="autoFillBackground">
-   <bool>true</bool>
+   <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 84);</string>
+   <string notr="true">background: transparent;
+</string>
   </property>
   <layout class="QVBoxLayout" name="topLayout">
    <item>
@@ -43,7 +44,7 @@
        <item>
         <widget class="QFrame" name="frame">
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
@@ -213,25 +214,6 @@
             </item>
            </layout>
           </item>
-          <item>
-           <widget class="QLabel" name="label_wallet_bgcoin">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="pixmap">
-             <pixmap resource="../bitcoin.qrc">:/images/wallet_bgcoin</pixmap>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="margin">
-             <number>-2</number>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
@@ -248,14 +230,39 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QLabel" name="label_wallet_bgcoin">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="../bitcoin.qrc">:/images/wallet_bgcoin</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <property name="indent">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QFrame" name="frame_2">
+         <property name="styleSheet">
+          <string notr="true">#frame_2 { background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #cdcdcd, stop:1.0 rgba(255, 255, 255, 16)); }</string>
+         </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
@@ -307,7 +314,7 @@
           <item>
            <widget class="QListView" name="listTransactions">
             <property name="styleSheet">
-             <string notr="true">QListView { background: rgb(208, 221, 255); }</string>
+             <string notr="true">background:transparent;</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>

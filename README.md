@@ -11,7 +11,7 @@
      '\::\;'            '\;'  '           \;:'      ‘           ¯                      '´¨               ¨'         
        `¨'                                °                   ‘                                               
 
-atom 0.9.4.3
+atom 0.9.5.0
 ============
 
 ATOM crypto-currency based on Quarkcoin, Bitcoin, Litecoin, Dogecoin, and Feathercoin.
